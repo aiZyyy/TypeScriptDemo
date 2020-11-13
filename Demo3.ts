@@ -12,8 +12,8 @@ console.log(xiaoJieJie.name);
 
 const xiaoJieJies: String[] = ["谢大脚", "刘英", "小红"];
 
-class Person {}
-const dajiao: Person = new Person();
+class Person1 {}
+const dajiao: Person1 = new Person1();
 
 const jianXiaoJieJie: () => string = () => {
     return "大脚";

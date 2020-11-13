@@ -16,3 +16,12 @@ class XiaoJieJie10 extends Lady {
 const goddess1 = new XiaoJieJie10();
 console.log(goddess1.sayHello());
 console.log(goddess1.sayLove());
+
+class XiaoJieJie122 extends Lady {
+  sayLove() {
+    return "I love you!";
+  }
+  sayHello() {
+    return super.sayHello() + "。你好！";
+  }
+}
