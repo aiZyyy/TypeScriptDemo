@@ -49,3 +49,6 @@ function getServe(status: any) {
 const result = getServe(Status.SPA);
 
 console.log(`我要去${result}`);
+console.log(Status.MASSAGE);
+console.log(Status.SPA);
+console.log(Status.DABAOJIAN);
