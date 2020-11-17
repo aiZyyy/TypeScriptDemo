@@ -7,33 +7,45 @@
     </div>
     <div>
       <button
-        v-for="(item, index) in girls"
+        v-for="(item, index) in data.girls"
         v-bind:key="index"
-        @click="selectGirlFun(index)"
+        @click="data.selectGirlFun(index)"
       >
         {{ index }} : {{ item }}
       </button>
     </div>
-    <div>你选择了【{{ selectGirl }}】为你服务</div>
+    <div>你选择了【{{ data.selectGirl }}】为你服务</div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 
 export default defineComponent({
   name: "App",
+  // setup() {
+  //   const girls = ref(["大脚", "刘英", "晓红"]);
+  //   const selectGirl = ref("");
+  //   const selectGirlFun = (index: number) => {
+  //     selectGirl.value = girls.value[index];
+  //   };
+  //   //因为在模板中这些变量和方法都需要条用，所以需要return出去。
+  //   return {
+  //     girls,
+  //     selectGirl,
+  //     selectGirlFun,
+  //   };
+  // },
   setup() {
-    const girls = ref(["大脚", "刘英", "晓红"]);
-    const selectGirl = ref("");
-    const selectGirlFun = (index: number) => {
-      selectGirl.value = girls.value[index];
-    };
-    //因为在模板中这些变量和方法都需要条用，所以需要return出去。
+    const data = reactive({
+      girls: ["大脚", "刘英", "晓红"],
+      selectGirl: "",
+      selectGirlFun: (index: number) => {
+        data.selectGirl = data.girls[index];
+      },
+    });
     return {
-      girls,
-      selectGirl,
-      selectGirlFun,
+      data,
     };
   },
 });
