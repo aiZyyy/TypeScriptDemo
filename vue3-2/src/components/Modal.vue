@@ -1,7 +1,9 @@
 <template>
-  <div id="center">
-    <h2>JSPang11</h2>
-  </div>
+  <teleport to="#modal">
+    <div id="center">
+      <h2>JSPang11</h2>
+    </div>
+  </teleport>
 </template>
 <script lang="ts">
 export default {};

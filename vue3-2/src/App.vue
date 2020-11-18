@@ -1,10 +1,10 @@
 <template>
   <div>
     <h2>欢迎光临红浪漫洗浴中心</h2>
-     <div>随机选择一位美女为你服务</div>
+    <div>随机选择一位美女为你服务</div>
+    <modal></modal>
     <div v-if="loading">Loading.....</div>
     <img v-if="loaded" :src="result.message" />
-    <modal></modal>
   </div>
 </template>
 <script lang="ts">
