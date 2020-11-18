@@ -15,11 +15,23 @@
       </button>
     </div>
     <div>你选择了【{{ selectGirl }}】为你服务</div>
+    <div>{{ overTest }}</div>
+    <button @click="overAction">点餐快乐</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs } from "vue";
+import {
+  defineComponent,
+  reactive,
+  ref,
+  toRefs,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  watch,
+} from "vue";
 
 interface DataProps {
   girls: string[];
@@ -50,9 +62,35 @@ export default defineComponent({
         data.selectGirl = data.girls[index];
       },
     });
+
+    const overTest = ref("欢迎");
+    const overAction = () => {
+      overTest.value = overTest.value + "点餐完毕 | ";
+    };
+    watch([overTest, () => data.selectGirl], (oldValue, newValue) => {
+      console.log(`new--->${newValue}`);
+      console.log(`old--->${oldValue}`);
+      document.title = newValue[0];
+    });
+    // onBeforeMount(() => {
+    //   console.log("2-组件挂载到页面之前执行-----onBeforeMount()");
+    // });
+
+    // onMounted(() => {
+    //   console.log("3-组件挂载到页面之后执行-----onMounted()");
+    // });
+    // onBeforeUpdate(() => {
+    //   console.log("4-组件更新之前-----onBeforeUpdate()");
+    // });
+
+    // onUpdated(() => {
+    //   console.log("5-组件更新之后-----onUpdated()");
+    // });
     const refData = toRefs(data);
     return {
       ...refData,
+      overTest,
+      overAction,
     };
   },
 });
