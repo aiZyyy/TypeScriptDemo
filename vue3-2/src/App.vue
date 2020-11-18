@@ -1,29 +1,27 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <h2>欢迎光临红浪漫洗浴中心</h2>
+     <div>随机选择一位美女为你服务</div>
+    <div v-if="loading">Loading.....</div>
+    <img v-if="loaded" :src="result.message" />
+    <modal></modal>
   </div>
 </template>
-
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
-
-@Options({
+import useUrlAxios from "./hooks/useURLAxios";
+import modal from "./components/Modal.vue";
+const app = {
+  name: "App",
   components: {
-    HelloWorld,
+    modal,
   },
-})
-export default class App extends Vue {}
-</script>
+  setup() {
+    const { result, loading, loaded } = useUrlAxios(
+      "https://dog.ceo/api/breeds/image/random"
+    );
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+    return { result, loading, loaded };
+  },
+};
+export default app;
+</script>
