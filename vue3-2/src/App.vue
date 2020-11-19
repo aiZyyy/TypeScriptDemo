@@ -1,26 +1,36 @@
 <template>
   <div>
-    <h2>欢迎光临红浪漫洗浴中心</h2>
-    <div>随机选择一位美女为你服务</div>
-    <modal></modal>
-    <div v-if="loading">Loading.....</div>
-    <img v-if="loaded" :src="result.message" />
+    <Suspense>
+      <template #default>
+        <girl-show />
+      </template>
+      <template #fallback>
+        <h1>Loading...</h1>
+      </template>
+    </Suspense>
   </div>
 </template>
 <script lang="ts">
-import useUrlAxios from "./hooks/useURLAxios";
-import modal from "./components/Modal.vue";
+// import useUrlAxios from "./hooks/useURLAxios";
+import GirlShow from "./components/GirlShow.vue";
+import AsyncShow from "./components/AsyncShow.vue";
+import { onErrorCaptured } from "vue";
 const app = {
   name: "App",
   components: {
-    modal,
+    AsyncShow,
+    GirlShow,
   },
   setup() {
-    const { result, loading, loaded } = useUrlAxios(
-      "https://dog.ceo/api/breeds/image/random"
-    );
+    onErrorCaptured((error) => {
+      console.log(`error====>`, error);
+      return true;
+    });
+    // const { result, loading, loaded } = useUrlAxios(
+    //   "https://dog.ceo/api/breeds/image/random"
+    // );
 
-    return { result, loading, loaded };
+    // return { result, loading, loaded };
   },
 };
 export default app;
